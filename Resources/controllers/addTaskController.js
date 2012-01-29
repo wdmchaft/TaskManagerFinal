@@ -18,6 +18,8 @@ var AddTaskController = Controller.extend({
 			if(this.responseText != "false")
 			{
 				alert("Your app has been added succesfully.");
+				taskController.view.loadTasks();
+
 				Ti.App.fireEvent('changeScreen', { changeTo: 'closeAddTask' });
 			}
 			else

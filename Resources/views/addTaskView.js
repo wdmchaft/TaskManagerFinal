@@ -63,6 +63,9 @@ var AddTaskView = View.extend({
 			task.title = txtTitle.value;
 			task.description = txtDescription.value;
 			addTaskController.addTask(e, task);
+			
+			txtTitle.value = "";
+			txtDescription.value = "";
 		});	
 	}
 })
