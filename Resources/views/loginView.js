@@ -5,13 +5,9 @@ var LoginView = View.extend({
     },
 
     layout: function() {
-	    // createView instead of createWindow
-		// we're adding a view to the window (win, coming from the controller == Ti.UI.currentWindow)
-		var loginScreen = Titanium.UI.createView({
-			title : 'Log in',
-			backgroundImage : '/images/bg.jpg'
-		});
 
+		this.win.title = 'Log in';
+		this.win.backgroundImage = '/images/bg.jpg';
 		
 		var logo = Titanium.UI.createView({
 		   backgroundImage : '/images/logo.png',
@@ -80,15 +76,18 @@ var LoginView = View.extend({
 		});
 
 		// add the UI components to the window and open it
-		loginScreen.add(logo);
-		loginScreen.add(txtName);
-		loginScreen.add(txtPass);
-		loginScreen.add(btnLogin);
-		loginScreen.add(strDescription);
-		loginScreen.add(strLogin);
-		loginScreen.add(strRegister);
+		this.win.add(logo);
+		this.win.add(txtName);
+		this.win.add(txtPass);
+		this.win.add(btnLogin);
+		this.win.add(strDescription);
+		this.win.add(strLogin);
+		this.win.add(strRegister);
+		
+		btnLogin.addEventListener('click', function(e)	{
+			loginController.btnLoginClick(e, txtName.value, txtPass.value);
+		});
+		strRegister.addEventListener('click', this.controller.btnRegisterClick);
 
-		// add the view to the currentWindow
-		this.win.add(loginScreen);
     }
 });
