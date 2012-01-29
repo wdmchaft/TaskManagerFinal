@@ -62,6 +62,9 @@ var TaskDetailView = View.extend({
 		this.win.add(lblDescrTitle);
 		this.win.add(strDescription);
 		this.win.add(btnDestroy);
+		
+		btnDestroy.addEventListener('click', this.controller.destroyTask);
+		
 		this.controller.getTaskDetail(Ti.App.selectedTaskID, function(task)
 		{
 			lblTitle.text = task.title;

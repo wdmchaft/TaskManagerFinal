@@ -32,6 +32,8 @@ Ti.App.addEventListener("loggedIn", function() {
 	taskController.view.loadTasks();
 });
 
+var taskDetailView, taskDetailController;
+
 Ti.App.addEventListener("changeScreen", function(e)
 {
 	switch(e.changeTo)
@@ -46,6 +48,9 @@ Ti.App.addEventListener("changeScreen", function(e)
 		case 'closeAddTask':
 			nav.close(addTaskView, { animated: true });
 			break;
+		case 'closeTaskDetail':
+			nav.close(taskDetailView, { animated: true});
+			break;
 		case 'loginView':
 			nav.close();
 			canvas.close();
@@ -54,8 +59,8 @@ Ti.App.addEventListener("changeScreen", function(e)
 		case 'taskDetail':
 			Ti.App.selectedTaskID = e.taskID;
 			Ti.App.selectedTaskTitle = e.taskTitle;
-			var taskDetailView = Ti.UI.createWindow({ exitOnClose : true});
-			var taskDetailController = new TaskDetailController(taskDetailView);
+			taskDetailView = Ti.UI.createWindow({ exitOnClose : true});
+			taskDetailController = new TaskDetailController(taskDetailView);
 			
 			nav.open(taskDetailView, { animated: true });
 			break;

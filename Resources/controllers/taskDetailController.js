@@ -24,6 +24,22 @@ var TaskDetailController = Controller.extend({
 		taskRequest.send();
     },
     
+    destroyTask: function()
+    {
+    	var taskRequest = Titanium.Network.createHTTPClient();
+    	var api_url = 'http://taskapi.heroku.com/users/' + Ti.App.Properties.getString("userID") + '/tasks/' + Ti.App.selectedTaskID + '/remove';
+    	
+    	taskRequest.onload = function()	{
+    		alert("Good job! We removed the task from your list.");
+			taskController.view.loadTasks();
+
+			Ti.App.fireEvent('changeScreen', { changeTo: 'closeTaskDetail' });
+    	}
+    	
+    	taskRequest.open('GET', api_url);
+		taskRequest.setRequestHeader('Content-Type', 'application/json');
+    	taskRequest.send({"remove":"task"});
+    }
   
 });
 
