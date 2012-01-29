@@ -1,0 +1,1 @@
+/Users/mobiel/Documents/Titanium Studio Workspace/TaskManagerFinal/Resources/views/taskDetailView.js

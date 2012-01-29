@@ -543,13 +543,14 @@ static NSString* ASI_TLS_VERSION_1_2 = @"kCFStreamSocketSecurityLevelTLSv1_2SSLv
 			[self setPostLength:[[self postBody] length]];
 		}
 	}
-		
+	
 	if ([self postLength] > 0) {
-		if ([requestMethod isEqualToString:@"GET"] || [requestMethod isEqualToString:@"DELETE"] || [requestMethod isEqualToString:@"HEAD"]) {
-			[self setRequestMethod:@"POST"];
-		}
-		[self addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%llu",[self postLength]]];
+	        if ([requestMethod isEqualToString:@"GET"] || [requestMethod isEqualToString:@"DELETE"] || [requestMethod isEqualToString:@"HEAD"]) {
+	            [self setRequestMethod:@"POST"];
+	        }
+	        [self addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%llu",[self postLength]]];
 	}
+		
 	[self setHaveBuiltPostBody:YES];
 
 }
