@@ -6,6 +6,7 @@ Ti.include("/include/mvc.js");
 Ti.include("/controllers/loginController.js");
 Ti.include("/controllers/taskController.js");
 Ti.include("/controllers/addTaskController.js");
+Ti.include("controllers/taskDetailController.js");
 
 var loginWin = Ti.UI.createWindow({ exitOnClose : true });
 var loginController = new LoginController(loginWin);
@@ -15,6 +16,7 @@ var taskController = new TaskController(taskWin);
 
 var addTaskView = Ti.UI.createWindow({ exitOnClose : true });
 var addTaskController = new AddTaskController(addTaskView);
+
 
 // a canvas window to add our navigation bar to
 var canvas = Ti.UI.createWindow({ exitOnClose : true });
@@ -49,6 +51,15 @@ Ti.App.addEventListener("changeScreen", function(e)
 			canvas.close();
 			loginWin.open({ animated: true });
 			break;
+		case 'taskDetail':
+			Ti.App.selectedTaskID = e.taskID;
+			Ti.App.selectedTaskTitle = e.taskTitle;
+			var taskDetailView = Ti.UI.createWindow({ exitOnClose : true});
+			var taskDetailController = new TaskDetailController(taskDetailView);
+			
+			nav.open(taskDetailView, { animated: true });
+			break;
+			
 	}
 });
 
