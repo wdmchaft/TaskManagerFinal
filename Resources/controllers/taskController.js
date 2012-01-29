@@ -12,18 +12,18 @@ var TaskController = Controller.extend({
     	Ti.App.fireEvent('changeScreen', { changeTo: 'addTask'});
     },
     
-    getTasks: function()
+    getTasks: function(callback)
     {
     	var taskRequest = Titanium.Network.createHTTPClient();
 		var api_url = 'http://taskapi.heroku.com/users/' + Ti.App.Properties.getString("userID") + '/tasks';
 		
-		var tasks = [];
 		taskRequest.onload = function()	{
     		var response = JSON.parse(this.responseText), 
     		len = response.length,
     		i = 0,
     		t;
-
+			var tasks = [];
+			
 			for(; i < len; i++)
 			{
 				task = response[i];
@@ -37,14 +37,17 @@ var TaskController = Controller.extend({
 				tasks.push(newTask);
 			}
 			
-			alert(tasks);
+			callback(tasks);
+			
 		}
 		
-		taskRequest.open('GET', api_url, false);
+		taskRequest.open('GET', api_url, true);
 		taskRequest.setRequestHeader('Content-Type', 'application/json');
 		taskRequest.send();
-		
-		alert(tasks);
+    },
+    
+    showDetail: function(e)	{
+    	Ti.App.fireEvent("changeScreen", {changeTo: "taskDetail", taskID: e.rowData.id, taskTitle: e.rowData.title});
     }
 });
 
