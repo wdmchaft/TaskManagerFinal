@@ -28,7 +28,7 @@ var LoginView = View.extend({
 		});
 		var strLogin = Titanium.UI.createLabel({
 			top : '185',
-			text : "Login:.",
+			text : "Login:",
 			height : '35',
 			width : '80%',
 			color : "#333",
