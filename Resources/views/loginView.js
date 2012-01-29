@@ -87,6 +87,7 @@ var LoginView = View.extend({
 		btnLogin.addEventListener('click', function(e)	{
 			loginController.btnLoginClick(e, txtName.value, txtPass.value);
 		});
+		
 		strRegister.addEventListener('click', this.controller.btnRegisterClick);
 
     }

@@ -15,22 +15,26 @@ var LoginController = Controller.extend({
 			if(this.responseText != "false")
 			{
 				// set userID global variable
-				Ti.App.userID = this.responseText;
+				Ti.App.Properties.setString("userID", this.responseText);
 				
 				// fire changeScreen event
-				var e = {changeTo: 'showTaskView'};
-				Ti.App.fireEvent('changeScreen', e);
+				Ti.App.fireEvent('loggedIn', e);
 			}
 			else
 			{
 				alert("Oops! Something went wrong. Please try again.");
-			}
+			}	
 		}
 		loginRequest.send({email:email, password:password});
     },
     
     btnRegisterClick: function(e) {
 		Titanium.Platform.openURL('http://www.drupal.be');
+    },
+    
+    logout: function(e) {
+		Ti.App.Properties.removeProperty('userID');
+		Ti.App.fireEvent("changeScreen", { changeTo : "loginView" });
     }
 });
 
