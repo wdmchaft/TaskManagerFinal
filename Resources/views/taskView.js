@@ -27,8 +27,12 @@ var TaskView = View.extend({
 			backgroundImage : '/images/bg.jpg'
 		});
 		
-		var data = this.controller.getTasks();
+		this.controller.getTasks(function(tasks)	{
+			taskTable.setData(tasks);
+		});
 		
-		var stack = [];
+		taskTable.addEventListener('click', this.controller.showDetail);
+		this.win.add(taskTable);
+
     }
 });
